@@ -1,0 +1,22 @@
+# Dépendances
+node_modules/
+
+# Fichiers de build
+.next/
+out/
+
+# Variables d'environnement (NE PAS PARTAGER)
+.env
+.env.local
+.env.production
+
+# Système
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Prisma
+prisma/*.db
