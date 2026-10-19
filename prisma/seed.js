@@ -17,14 +17,12 @@ async function main() {
     where: { email: adminEmail },
     update: {
       password: hashedPassword,
-      role: "ADMIN",
       name: "Administrateur",
     },
     create: {
       email: adminEmail,
       name: "Administrateur",
       password: hashedPassword,
-      role: "ADMIN",
     },
   });
   console.log(`✅ Admin configuré avec succès : ${admin.email}`);
