@@ -78,10 +78,10 @@ export async function PUT(
         description_fr: body.description_fr ? String(body.description_fr).trim() : null,
         description_ar: body.description_ar ? String(body.description_ar).trim() : null,
         
-        // Gestion de la relation département compatible TypeScript / Prisma
+        // Gestion propre du département (connexion si l'ID est fourni)
         ...(body.departmentId
           ? { department: { connect: { id: String(body.departmentId) } } }
-          : { department: { disconnect: true } }),
+          : {}),
 
         isActive: body.isActive !== undefined ? Boolean(body.isActive) : true,
         isFeatured: body.isFeatured !== undefined ? Boolean(body.isFeatured) : false,
