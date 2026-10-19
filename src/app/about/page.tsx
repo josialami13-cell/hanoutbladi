@@ -1,4 +1,4 @@
-"use client";
+/*"use client";
 
 import Link from "next/link";
 import { FiArrowRight } from "react-icons/fi";
@@ -8,20 +8,20 @@ export default function AboutPage() {
   return (
     <div className="bg-[#FAF9F5] min-h-screen selection:bg-[#2C3E2D] selection:text-white">
       
-      {/* SECTION HERO AVEC LA VRAIE PHOTO BIEN VISIBLE */}
+     }
       <div className="relative bg-stone-900 text-white py-28 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        {/* Image de fond avec opacité augmentée (plus claire) */}
-        <div className="absolute inset-0 z-0">
+        {/* Image de fond avec opacité augmentée (plus claire) *//*}
+       /* <div className="absolute inset-0 z-0">
           <img 
             src="/images/ferme-plaza.jpg" 
             alt="Domaine Plaza D'Oliviers Settat" 
             className="w-full h-full object-cover opacity-75 scale-105 transform transition duration-1000"
           />
-          {/* Voile assombrissant très léger juste pour le confort de lecture du texte */}
-          <div className="absolute inset-0 bg-black/40"></div>
+          {/* Voile assombrissant très léger juste pour le confort de lecture du texte *//*}
+        /*  <div className="absolute inset-0 bg-black/40"></div>
         </div>
 
-        {/* Contenu de l'en-tête */}
+        {/* Contenu de l'en-tête *//*}
         <div className="relative z-10 max-w-4xl mx-auto text-center space-y-6 pt-6">
           <span className="text-xs font-bold uppercase tracking-widest text-[#C5A059] bg-stone-900/60 border border-[#C5A059]/40 px-4 py-1.5 rounded-full backdrop-blur-xs">
             Domaine Plaza D'Oliviers • Mzamza Janoubia, Settat
@@ -35,10 +35,10 @@ export default function AboutPage() {
         </div>
       </div>
 
-      {/* CONTENU PRINCIPAL */}
+      {/* CONTENU PRINCIPAL *//*/*}
       <div className="max-w-5xl mx-auto py-16 px-4 sm:px-6 lg:px-8 space-y-16">
         
-        {/* Grille de présentation */}
+        {/* Grille de présentation *//*}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           <div className="bg-white p-8 rounded-3xl border border-stone-200 shadow-sm space-y-4">
             <h3 className="text-xl font-serif font-bold text-[#2C3E2D]">
@@ -59,8 +59,8 @@ export default function AboutPage() {
           </div>
         </div>
 
-        {/* Section Valeurs & Localisation */}
-        <div className="bg-[#2C3E2D] text-white p-8 sm:p-12 rounded-3xl grid grid-cols-1 sm:grid-cols-3 gap-8 text-center shadow-lg">
+        {/* Section Valeurs & Localisation *//*}
+       /*  <div className="bg-[#2C3E2D] text-white p-8 sm:p-12 rounded-3xl grid grid-cols-1 sm:grid-cols-3 gap-8 text-center shadow-lg">
           <div className="space-y-2">
             <span className="text-3xl font-serif font-black text-[#C5A059]">60 ha</span>
             <h4 className="font-bold text-sm">Domaine Naturel</h4>
@@ -92,3 +92,50 @@ export default function AboutPage() {
     </div>
   );
 }
+
+*/
+
+
+"use client";
+
+import TranslatedText from "@/components/TranslatedText";
+import { FiClock } from "react-icons/fi";
+
+export default function BlogPage() {
+  return (
+    <div className="bg-[#FAF9F5] min-h-[80vh] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 selection:bg-[#2C3E2D] selection:text-white">
+      <div className="max-w-md w-full text-center space-y-6 bg-white p-8 sm:p-12 rounded-2xl border border-stone-200/90 shadow-2xs">
+        
+        {/* Icône */}
+        <div className="w-16 h-16 mx-auto bg-[#FAF9F5] border border-stone-200 rounded-full flex items-center justify-center text-[#C5A059]">
+          <FiClock size={28} />
+        </div>
+
+        {/* Titre */}
+        <div className="space-y-2">
+          <h1 className="text-2xl sm:text-3xl font-serif font-bold text-stone-900">
+            <TranslatedText text="Coming Soon" arText="قريباً" />
+          </h1>
+          <p className="text-xs text-stone-500 font-light leading-relaxed">
+            <TranslatedText 
+              text="Notre site  arrive très bientôt. Restez connectés ." 
+              arText="مدونتنا ستطلق قريباً جداً. ترقبوا اكتشاف قصصنا، وصفاتنا وأسرار أراضينا." 
+            />
+          </p>
+        </div>
+
+        {/* Bouton retour / accueil */}
+        <div className="pt-2">
+          <a
+            href="/"
+            className="inline-block w-full py-3 px-4 bg-[#2C3E2D] hover:bg-[#1e2a1f] text-white text-xs font-medium rounded-xl transition shadow-2xs text-center"
+          >
+            <TranslatedText text="Retour à l'accueil" arText="العودة إلى الرئيسية" />
+          </a>
+        </div>
+
+      </div>
+    </div>
+  );
+}
+

@@ -1,3 +1,7 @@
+// =============================================================
+// COMPOSANT ADMIN DASHBOARD - 100% Flexible (Mobile, Tablette, PC)
+// =============================================================
+
 "use client";
 
 import { useSession } from "next-auth/react";
@@ -13,12 +17,15 @@ import {
   FiCreditCard,
   FiFolder,
   FiGrid,
-  FiLayers,
   FiBox,
   FiUsers,
   FiHome,
   FiSettings,
-  FiShoppingCart
+  FiShoppingCart,
+  FiImage,
+  FiUserPlus,
+  FiFileText,
+  FiStar
 } from "react-icons/fi";
 
 interface CategoryItem {
@@ -139,188 +146,224 @@ export default function AdminDashboardPage() {
   }
 
   return (
-    <div className="space-y-8 pb-10">
-      {/* En-tête */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+    <div className="space-y-6 sm:space-y-8 pb-12 px-2 sm:px-0">
+      
+      {/* En-tête flexible */}
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-4 sm:p-6 rounded-2xl border border-gray-200 shadow-sm">
         <div>
-          <h1 className="text-3xl font-extrabold text-gray-900">Tableau de Bord & Gestion des Tables</h1>
-          <p className="text-sm text-gray-500 mt-1">
-            Connecté en tant que : <span className="font-semibold text-emerald-600">{session?.user?.email}</span>
+          <h1 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-gray-900">Tableau de Bord HanoutBladi</h1>
+          <p className="text-xs sm:text-sm text-gray-500 mt-1">
+            Connecté : <span className="font-semibold text-emerald-600 truncate">{session?.user?.email}</span>
           </p>
         </div>
         {isLoadingData && (
-          <div className="flex items-center gap-2 text-xs text-gray-400 bg-white px-3 py-1.5 rounded-lg border border-gray-200 shadow-sm">
-            <FiRefreshCw className="animate-spin" /> Actualisation...
+          <div className="flex items-center gap-2 text-xs text-gray-500 bg-gray-50 px-3 py-1.5 rounded-xl border border-gray-200">
+            <FiRefreshCw className="animate-spin text-emerald-600" /> <span>Actualisation...</span>
           </div>
         )}
       </div>
 
-      {/* MÉTRIQUES CLÉS */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-        <Link href="/admin/orders" className="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 hover:border-emerald-500 transition block">
+      {/* MÉTRIQUES CLÉS (Flexible Grid) */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6">
+        
+        <Link href="/admin/orders" className="bg-white p-5 rounded-2xl shadow-sm border border-gray-200 hover:border-emerald-500 transition block">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">Chiffre d'affaires</span>
+            <span className="text-[11px] font-bold text-gray-500 uppercase tracking-wider">Chiffre d'affaires</span>
             <div className="p-2.5 bg-emerald-50 text-emerald-600 rounded-xl"><FiDollarSign size={18} /></div>
           </div>
-          <p className="text-2xl font-black text-gray-900 mt-4">{totalRevenue.toFixed(2)} MAD</p>
+          <p className="text-xl sm:text-2xl font-black text-gray-900 mt-3">{totalRevenue.toFixed(2)} MAD</p>
         </Link>
 
-        <Link href="/admin/orders" className="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 hover:border-blue-500 transition block">
+        <Link href="/admin/orders" className="bg-white p-5 rounded-2xl shadow-sm border border-gray-200 hover:border-blue-500 transition block">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">Commandes</span>
+            <span className="text-[11px] font-bold text-gray-500 uppercase tracking-wider">Commandes</span>
             <div className="p-2.5 bg-blue-50 text-blue-600 rounded-xl"><FiShoppingBag size={18} /></div>
           </div>
-          <p className="text-2xl font-black text-gray-900 mt-4">{ordersCount}</p>
+          <p className="text-xl sm:text-2xl font-black text-gray-900 mt-3">{ordersCount}</p>
         </Link>
 
-        <Link href="/admin/products" className="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 hover:border-purple-500 transition block">
+        <Link href="/admin/products" className="bg-white p-5 rounded-2xl shadow-sm border border-gray-200 hover:border-purple-500 transition block">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">Produits</span>
+            <span className="text-[11px] font-bold text-gray-500 uppercase tracking-wider">Produits</span>
             <div className="p-2.5 bg-purple-50 text-purple-600 rounded-xl"><FiPackage size={18} /></div>
           </div>
-          <p className="text-2xl font-black text-gray-900 mt-4">{productsCount}</p>
+          <p className="text-xl sm:text-2xl font-black text-gray-900 mt-3">{productsCount}</p>
         </Link>
 
-        <Link href="/admin/users" className="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 hover:border-indigo-500 transition block">
+        <Link href="/admin/users" className="bg-white p-5 rounded-2xl shadow-sm border border-gray-200 hover:border-indigo-500 transition block">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">Utilisateurs</span>
+            <span className="text-[11px] font-bold text-gray-500 uppercase tracking-wider">Utilisateurs</span>
             <div className="p-2.5 bg-indigo-50 text-indigo-600 rounded-xl"><FiUsers size={18} /></div>
           </div>
-          <p className="text-2xl font-black text-gray-900 mt-4">{usersCount}</p>
+          <p className="text-xl sm:text-2xl font-black text-gray-900 mt-3">{usersCount}</p>
         </Link>
 
-        <Link href="/admin/departments" className="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 hover:border-amber-500 transition block">
+        <Link href="/admin/departments" className="bg-white p-5 rounded-2xl shadow-sm border border-gray-200 hover:border-amber-500 transition block sm:col-span-2 lg:col-span-1">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">Rayons (Dept / Cat)</span>
+            <span className="text-[11px] font-bold text-gray-500 uppercase tracking-wider">Rayons (Dept/Cat)</span>
             <div className="p-2.5 bg-amber-50 text-amber-600 rounded-xl"><FiGrid size={18} /></div>
           </div>
-          <p className="text-2xl font-black text-gray-900 mt-4">{departmentsCount} / {categoriesCount}</p>
+          <p className="text-xl sm:text-2xl font-black text-gray-900 mt-3">{departmentsCount} / {categoriesCount}</p>
         </Link>
+
       </div>
 
-      {/* ACCÈS RAPIDE À TOUS LES MODULES DES TABLES */}
+      {/* GESTION COMPLÈTE DES TABLES & ENTITÉS (Responsive Grid) */}
       <div>
-        <h2 className="text-lg font-bold text-gray-900 mb-4">Gestion Complète des Tables & Entités</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <h2 className="text-base sm:text-lg font-bold text-gray-900 mb-4 px-1">Gestion Complète des Tables & Entités</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           
           {/* 1. Départements */}
-          <Link href="/admin/departments" className="bg-white p-6 rounded-2xl border border-gray-200 hover:border-amber-500 hover:shadow-md transition group flex flex-col justify-between">
+          <Link href="/admin/departments" className="bg-white p-5 rounded-2xl border border-gray-200 hover:border-amber-500 hover:shadow-md transition group flex flex-col justify-between">
             <div>
-              <div className="w-12 h-12 bg-amber-50 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <FiGrid className="text-xl text-amber-600" />
+              <div className="w-11 h-11 bg-amber-50 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                <FiGrid className="text-lg text-amber-600" />
               </div>
-              <h3 className="font-bold text-gray-900 text-base">1. Départements</h3>
-              <p className="text-xs text-gray-500 mt-1 leading-relaxed">Rayons principaux bilingues (Produits du terroir, Artisanat, etc.).</p>
+              <h3 className="font-bold text-gray-900 text-sm sm:text-base">1. Départements</h3>
+              <p className="text-xs text-gray-500 mt-1 leading-relaxed">Rayons principaux bilingues.</p>
             </div>
           </Link>
 
           {/* 2. Catégories */}
-          <Link href="/admin/categories" className="bg-white p-6 rounded-2xl border border-gray-200 hover:border-orange-500 hover:shadow-md transition group flex flex-col justify-between">
+          <Link href="/admin/categories" className="bg-white p-5 rounded-2xl border border-gray-200 hover:border-orange-500 hover:shadow-md transition group flex flex-col justify-between">
             <div>
-              <div className="w-12 h-12 bg-orange-50 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <FiFolder className="text-xl text-orange-600" />
+              <div className="w-11 h-11 bg-orange-50 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                <FiFolder className="text-lg text-orange-600" />
               </div>
-              <h3 className="font-bold text-gray-900 text-base">2. Catégories</h3>
-              <p className="text-xs text-gray-500 mt-1 leading-relaxed">Sous-familles de produits et organisation thématique.</p>
+              <h3 className="font-bold text-gray-900 text-sm sm:text-base">2. Catégories</h3>
+              <p className="text-xs text-gray-500 mt-1 leading-relaxed">Sous-familles de produits.</p>
             </div>
           </Link>
 
           {/* 3. Produits */}
-          <Link href="/admin/products" className="bg-white p-6 rounded-2xl border border-gray-200 hover:border-purple-500 hover:shadow-md transition group flex flex-col justify-between">
+          <Link href="/admin/products" className="bg-white p-5 rounded-2xl border border-gray-200 hover:border-purple-500 hover:shadow-md transition group flex flex-col justify-between">
             <div>
-              <div className="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <FiPackage className="text-xl text-purple-600" />
+              <div className="w-11 h-11 bg-purple-50 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                <FiPackage className="text-lg text-purple-600" />
               </div>
-              <h3 className="font-bold text-gray-900 text-base">3. Produits</h3>
-              <p className="text-xs text-gray-500 mt-1 leading-relaxed">Catalogue d'articles, prix, fiches et visuels.</p>
+              <h3 className="font-bold text-gray-900 text-sm sm:text-base">3. Produits</h3>
+              <p className="text-xs text-gray-500 mt-1 leading-relaxed">Catalogue, prix et fiches.</p>
             </div>
           </Link>
 
           {/* 4. Stocks & Entrepôts */}
-          <Link href="/admin/stores" className="bg-white p-6 rounded-2xl border border-gray-200 hover:border-emerald-500 hover:shadow-md transition group flex flex-col justify-between">
+          <Link href="/admin/stores" className="bg-white p-5 rounded-2xl border border-gray-200 hover:border-emerald-500 hover:shadow-md transition group flex flex-col justify-between">
             <div>
-              <div className="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <FiBox className="text-xl text-emerald-600" />
+              <div className="w-11 h-11 bg-emerald-50 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                <FiBox className="text-lg text-emerald-600" />
               </div>
-              <h3 className="font-bold text-gray-900 text-base">4. Stocks & Entrepôts</h3>
-              <p className="text-xs text-gray-500 mt-1 leading-relaxed">Suivi quantitatif et alertes de réapprovisionnement.</p>
+              <h3 className="font-bold text-gray-900 text-sm sm:text-base">4. Stocks & Entrepôts</h3>
+              <p className="text-xs text-gray-500 mt-1 leading-relaxed">Suivi quantitatif et alertes.</p>
             </div>
           </Link>
 
           {/* 5. Utilisateurs */}
-          <Link href="/admin/users" className="bg-white p-6 rounded-2xl border border-gray-200 hover:border-indigo-500 hover:shadow-md transition group flex flex-col justify-between">
+          <Link href="/admin/users" className="bg-white p-5 rounded-2xl border border-gray-200 hover:border-indigo-500 hover:shadow-md transition group flex flex-col justify-between">
             <div>
-              <div className="w-12 h-12 bg-indigo-50 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <FiUsers className="text-xl text-indigo-600" />
+              <div className="w-11 h-11 bg-indigo-50 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                <FiUsers className="text-lg text-indigo-600" />
               </div>
-              <h3 className="font-bold text-gray-900 text-base">5. Utilisateurs</h3>
-              <p className="text-xs text-gray-500 mt-1 leading-relaxed">Gestion des comptes clients et de l'administrateur.</p>
+              <h3 className="font-bold text-gray-900 text-sm sm:text-base">5. Utilisateurs</h3>
+              <p className="text-xs text-gray-500 mt-1 leading-relaxed">Comptes et permissions.</p>
             </div>
           </Link>
 
           {/* 6. Commandes */}
-          <Link href="/admin/orders" className="bg-white p-6 rounded-2xl border border-gray-200 hover:border-blue-500 hover:shadow-md transition group flex flex-col justify-between">
+          <Link href="/admin/orders" className="bg-white p-5 rounded-2xl border border-gray-200 hover:border-blue-500 hover:shadow-md transition group flex flex-col justify-between">
             <div>
-              <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <FiShoppingBag className="text-xl text-blue-600" />
+              <div className="w-11 h-11 bg-blue-50 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                <FiShoppingBag className="text-lg text-blue-600" />
               </div>
-              <h3 className="font-bold text-gray-900 text-base">6. Commandes</h3>
-              <p className="text-xs text-gray-500 mt-1 leading-relaxed">Suivi des achats en ligne et validation des paniers.</p>
+              <h3 className="font-bold text-gray-900 text-sm sm:text-base">6. Commandes</h3>
+              <p className="text-xs text-gray-500 mt-1 leading-relaxed">Achats en ligne et validation.</p>
             </div>
           </Link>
 
-          {/* 7. Achats & Approvisionnement */}
-          <Link href="/admin/purchases" className="bg-white p-6 rounded-2xl border border-gray-200 hover:border-sky-500 hover:shadow-md transition group flex flex-col justify-between">
+          {/* 7. Facturation (Nouveau) */}
+          <Link href="/admin/invoices" className="bg-white p-5 rounded-2xl border border-gray-200 hover:border-emerald-600 hover:shadow-md transition group flex flex-col justify-between">
             <div>
-              <div className="w-12 h-12 bg-sky-50 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <FiShoppingCart className="text-xl text-sky-600" />
+              <div className="w-11 h-11 bg-emerald-50 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                <FiFileText className="text-lg text-emerald-700" />
               </div>
-              <h3 className="font-bold text-gray-900 text-base">7. Achats & Approvisionnements</h3>
-              <p className="text-xs text-gray-500 mt-1 leading-relaxed">Achats de stock auprès des producteurs et coopératives.</p>
+              <h3 className="font-bold text-gray-900 text-sm sm:text-base">7. Facturation</h3>
+              <p className="text-xs text-gray-500 mt-1 leading-relaxed">Factures multi-sociétés (Plaza, FS Pro...).</p>
             </div>
           </Link>
 
-          {/* 8. Paiements */}
-          <Link href="/admin/payments" className="bg-white p-6 rounded-2xl border border-gray-200 hover:border-teal-500 hover:shadow-md transition group flex flex-col justify-between">
+          {/* 8. Commerciaux (Nouveau) */}
+          <Link href="/admin/commercials" className="bg-white p-5 rounded-2xl border border-gray-200 hover:border-violet-500 hover:shadow-md transition group flex flex-col justify-between">
             <div>
-              <div className="w-12 h-12 bg-teal-50 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <FiCreditCard className="text-xl text-teal-600" />
+              <div className="w-11 h-11 bg-violet-50 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                <FiUserPlus className="text-lg text-violet-600" />
               </div>
-              <h3 className="font-bold text-gray-900 text-base">8. Paiements</h3>
-              <p className="text-xs text-gray-500 mt-1 leading-relaxed">Transactions et modes de règlement (COD, Virement, etc.).</p>
+              <h3 className="font-bold text-gray-900 text-sm sm:text-base">8. Commerciaux</h3>
+              <p className="text-xs text-gray-500 mt-1 leading-relaxed">Agents, portefeuilles et commissions.</p>
             </div>
           </Link>
 
-          {/* 9. Livraisons */}
-          <Link href="/admin/deliveries" className="bg-white p-6 rounded-2xl border border-gray-200 hover:border-cyan-500 hover:shadow-md transition group flex flex-col justify-between">
+          {/* 9. Bannières & Publicités (Nouveau) */}
+          <Link href="/admin/banners" className="bg-white p-5 rounded-2xl border border-gray-200 hover:border-pink-500 hover:shadow-md transition group flex flex-col justify-between">
             <div>
-              <div className="w-12 h-12 bg-cyan-50 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <FiTruck className="text-xl text-cyan-600" />
+              <div className="w-11 h-11 bg-pink-50 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                <FiImage className="text-lg text-pink-600" />
               </div>
-              <h3 className="font-bold text-gray-900 text-base">9. Livraisons</h3>
-              <p className="text-xs text-gray-500 mt-1 leading-relaxed">Statuts d'expédition et suivi logistique.</p>
+              <h3 className="font-bold text-gray-900 text-sm sm:text-base">9. Bannières & Pubs</h3>
+              <p className="text-xs text-gray-500 mt-1 leading-relaxed">Gestion des bannières publicitaires.</p>
             </div>
           </Link>
 
-          {/* 10. Fournisseurs */}
-          <Link href="/admin/suppliers" className="bg-white p-6 rounded-2xl border border-gray-200 hover:border-rose-500 hover:shadow-md transition group flex flex-col justify-between">
+          {/* 10. Achats & Approvisionnement */}
+          <Link href="/admin/purchases" className="bg-white p-5 rounded-2xl border border-gray-200 hover:border-sky-500 hover:shadow-md transition group flex flex-col justify-between">
             <div>
-              <div className="w-12 h-12 bg-rose-50 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <FiHome className="text-xl text-rose-600" />
+              <div className="w-11 h-11 bg-sky-50 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                <FiShoppingCart className="text-lg text-sky-600" />
               </div>
-              <h3 className="font-bold text-gray-900 text-base">10. Fournisseurs</h3>
-              <p className="text-xs text-gray-500 mt-1 leading-relaxed">Coopératives et producteurs locaux partenaires.</p>
+              <h3 className="font-bold text-gray-900 text-sm sm:text-base">10. Approvisionnements</h3>
+              <p className="text-xs text-gray-500 mt-1 leading-relaxed">Achats de stock auprès des sources.</p>
             </div>
           </Link>
 
-          {/* 11. Configuration */}
-          <Link href="/admin/settings" className="bg-white p-6 rounded-2xl border border-gray-200 hover:border-slate-500 hover:shadow-md transition group flex flex-col justify-between">
+          {/* 11. Paiements */}
+          <Link href="/admin/payments" className="bg-white p-5 rounded-2xl border border-gray-200 hover:border-teal-500 hover:shadow-md transition group flex flex-col justify-between">
             <div>
-              <div className="w-12 h-12 bg-slate-50 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <FiSettings className="text-xl text-slate-600" />
+              <div className="w-11 h-11 bg-teal-50 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                <FiCreditCard className="text-lg text-teal-600" />
               </div>
-              <h3 className="font-bold text-gray-900 text-base">11. Configuration</h3>
-              <p className="text-xs text-gray-500 mt-1 leading-relaxed">Paramètres globaux et métadonnées du site.</p>
+              <h3 className="font-bold text-gray-900 text-sm sm:text-base">11. Paiements</h3>
+              <p className="text-xs text-gray-500 mt-1 leading-relaxed">Transactions et règlements.</p>
+            </div>
+          </Link>
+
+          {/* 12. Livraisons */}
+          <Link href="/admin/deliveries" className="bg-white p-5 rounded-2xl border border-gray-200 hover:border-cyan-500 hover:shadow-md transition group flex flex-col justify-between">
+            <div>
+              <div className="w-11 h-11 bg-cyan-50 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                <FiTruck className="text-lg text-cyan-600" />
+              </div>
+              <h3 className="font-bold text-gray-900 text-sm sm:text-base">12. Livraisons</h3>
+              <p className="text-xs text-gray-500 mt-1 leading-relaxed">Statuts d'expédition et livreurs.</p>
+            </div>
+          </Link>
+
+          {/* 13. Fournisseurs */}
+          <Link href="/admin/suppliers" className="bg-white p-5 rounded-2xl border border-gray-200 hover:border-rose-500 hover:shadow-md transition group flex flex-col justify-between">
+            <div>
+              <div className="w-11 h-11 bg-rose-50 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                <FiHome className="text-lg text-rose-600" />
+              </div>
+              <h3 className="font-bold text-gray-900 text-sm sm:text-base">13. Fournisseurs</h3>
+              <p className="text-xs text-gray-500 mt-1 leading-relaxed">Coopératives et partenaires.</p>
+            </div>
+          </Link>
+
+          {/* 14. Configuration */}
+          <Link href="/admin/settings" className="bg-white p-5 rounded-2xl border border-gray-200 hover:border-slate-500 hover:shadow-md transition group flex flex-col justify-between">
+            <div>
+              <div className="w-11 h-11 bg-slate-50 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                <FiSettings className="text-lg text-slate-600" />
+              </div>
+              <h3 className="font-bold text-gray-900 text-sm sm:text-base">14. Configuration</h3>
+              <p className="text-xs text-gray-500 mt-1 leading-relaxed">Paramètres globaux du site.</p>
             </div>
           </Link>
 

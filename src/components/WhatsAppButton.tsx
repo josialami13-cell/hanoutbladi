@@ -11,7 +11,7 @@ import { FaWhatsapp } from "react-icons/fa";
 
 export default function WhatsAppButton() {
   // Numéro WhatsApp (à modifier avec votre numéro)
-  const phoneNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "212XXXXXXXXX";
+  const phoneNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "212661337729";
 
   // Message pré-rempli quand le client clique
   const message = encodeURIComponent(

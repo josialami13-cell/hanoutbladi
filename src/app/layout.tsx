@@ -3,7 +3,7 @@ import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import { LanguageProvider } from "@/context/LanguageContext";
 import Providers from "@/components/Providers";
-import SyncProvider from "@/components/SyncProvider";
+
 import MainLayoutWrapper from "@/components/MainLayoutWrapper";
 import WhatsAppButton from "@/components/WhatsAppButton";
 
@@ -22,7 +22,7 @@ export default function RootLayout({
       <body className="min-h-screen max-w-[100vw] overflow-x-hidden bg-[#F8FAF6] text-stone-900 flex flex-col font-sans">
         <Providers>
           <LanguageProvider>
-            <SyncProvider>
+           
               <Toaster
                 position="bottom-right"
                 toastOptions={{
@@ -43,7 +43,7 @@ export default function RootLayout({
               {/* Bouton WhatsApp Flottant */}
               <WhatsAppButton />
 
-            </SyncProvider>
+            
           </LanguageProvider>
         </Providers>
       </body>
