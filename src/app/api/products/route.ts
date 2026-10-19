@@ -25,7 +25,7 @@ export async function GET(request: NextRequest) {
       where.categoryId = categoryId;
     }
 
-    // 2. Filtre par Rayon / Département (Indispensable pour corriger votre problème)
+    // 2. Filtre par Rayon / Département
     if (departmentParam) {
       where.category = {
         department: {
@@ -88,13 +88,11 @@ export async function POST(request: NextRequest) {
       description_fr,
       description_ar,
       price,
-      oldPrice,
       image,
       images,
       stock,
       isActive,
       isFeatured,
-      badge,
       categoryId,
     } = body;
 
@@ -113,13 +111,11 @@ export async function POST(request: NextRequest) {
         description_fr: description_fr || "",
         description_ar: description_ar || "",
         price: parseFloat(price),
-        oldPrice: oldPrice ? parseFloat(oldPrice) : null,
         image: image || "",
         images: images || [],
         stock: parseInt(stock) || 0,
         isActive: isActive ?? true,
         isFeatured: isFeatured ?? false,
-        badge: badge || null,
         categoryId,
       },
     });

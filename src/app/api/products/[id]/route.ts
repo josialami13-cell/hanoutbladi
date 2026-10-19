@@ -1,18 +1,8 @@
-// =============================================================
-// API PRODUIT INDIVIDUEL - GET / PUT / DELETE
-// =============================================================
-// Ce fichier gère un produit spécifique par son ID :
-// GET    = Voir les détails d'un produit
-// PUT    = Modifier un produit (admin)
-// DELETE = Supprimer un produit (admin)
-// =============================================================
-
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 
-// --- GET : Récupérer un produit par son ID ---
 export async function GET(
   request: NextRequest,
   { params }: { params: { id: string } }
@@ -36,14 +26,11 @@ export async function GET(
   }
 }
 
-// --- PUT : Modifier un produit ---
-// Admin seulement
 export async function PUT(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
   try {
-    // Vérifier l'authentification admin
     const session = await getServerSession(authOptions);
     if (!session) {
       return NextResponse.json({ error: "Non autorisé" }, { status: 401 });
@@ -51,7 +38,6 @@ export async function PUT(
 
     const body = await request.json();
 
-    // Mettre à jour le produit avec les nouvelles données
     const product = await prisma.product.update({
       where: { id: params.id },
       data: {
@@ -61,13 +47,11 @@ export async function PUT(
         description_fr: body.description_fr,
         description_ar: body.description_ar,
         price: body.price ? parseFloat(body.price) : undefined,
-        oldPrice: body.oldPrice ? parseFloat(body.oldPrice) : null,
         image: body.image,
         images: body.images,
         stock: body.stock ? parseInt(body.stock) : undefined,
         isActive: body.isActive,
         isFeatured: body.isFeatured,
-        badge: body.badge || null,
         categoryId: body.categoryId,
       },
     });
@@ -81,20 +65,16 @@ export async function PUT(
   }
 }
 
-// --- DELETE : Supprimer un produit ---
-// Admin seulement
 export async function DELETE(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
   try {
-    // Vérifier l'authentification admin
     const session = await getServerSession(authOptions);
     if (!session) {
       return NextResponse.json({ error: "Non autorisé" }, { status: 401 });
     }
 
-    // Supprimer le produit de la base de données
     await prisma.product.delete({
       where: { id: params.id },
     });

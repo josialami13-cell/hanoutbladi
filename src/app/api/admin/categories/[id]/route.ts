@@ -58,6 +58,13 @@ export async function PUT(
       );
     }
 
+    if (!body.departmentId) {
+      return NextResponse.json(
+        { error: "Le département est obligatoire pour une catégorie." },
+        { status: 400 }
+      );
+    }
+
     const rawSlug = body.slug || body.name_fr;
     const finalSlug = String(rawSlug)
       .toLowerCase()
@@ -78,10 +85,10 @@ export async function PUT(
         description_fr: body.description_fr ? String(body.description_fr).trim() : null,
         description_ar: body.description_ar ? String(body.description_ar).trim() : null,
         
-        // Gestion de la relation département compatible TypeScript / Prisma
-        ...(body.departmentId
-          ? { department: { connect: { id: String(body.departmentId) } } }
-          : { department: { disconnect: true } }),
+        // Liaison obligatoire du département
+        department: {
+          connect: { id: String(body.departmentId) },
+        },
 
         isActive: body.isActive !== undefined ? Boolean(body.isActive) : true,
         isFeatured: body.isFeatured !== undefined ? Boolean(body.isFeatured) : false,

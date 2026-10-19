@@ -56,7 +56,7 @@ export async function PUT(request: NextRequest) {
       currency,
       defaultMinStockAlert,
       logoUrl,
-      heroBanners,      // استقبال مصفوفة صور الكاروسيل الإعلاني
+      heroBannerUrl,      // Remplacement de heroBanners par heroBannerUrl (String dans le schema)
       aboutImageUrl,
       openingHours,
       enableHomeDelivery,
@@ -82,7 +82,7 @@ export async function PUT(request: NextRequest) {
         currency,
         defaultMinStockAlert: Number(defaultMinStockAlert || 5),
         logoUrl,
-        heroBanners: heroBanners || [], // حفظ مصفوفة البانيرات
+        heroBannerUrl: heroBannerUrl || "/images/hero-bg.jpg",
         aboutImageUrl,
         openingHours: openingHours || [],
         enableHomeDelivery: Boolean(enableHomeDelivery),
@@ -106,7 +106,7 @@ export async function PUT(request: NextRequest) {
         currency: currency || "MAD",
         defaultMinStockAlert: Number(defaultMinStockAlert || 5),
         logoUrl,
-        heroBanners: heroBanners || [],
+        heroBannerUrl: heroBannerUrl || "/images/hero-bg.jpg",
         aboutImageUrl,
         openingHours: openingHours || [],
         enableHomeDelivery: Boolean(enableHomeDelivery),
